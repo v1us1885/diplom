@@ -25,7 +25,7 @@ resource "yandex_kubernetes_node_group" "node-group" {
   instance_template {
     platform_id = "standard-v2"
     resources {
-      memory = 2
+      memory = 3
       cores  = 2
       core_fraction = 20
     }
