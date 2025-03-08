@@ -2,7 +2,7 @@ resource "yandex_kubernetes_node_group" "node-group" {
   cluster_id  = yandex_kubernetes_cluster.k8s_cluster.id
   name        = "node-group"
   description = "Worker-ноды для MKS"
-  version     = "1.28"
+  version     = "1.29"
 
   scale_policy {
     fixed_scale {
