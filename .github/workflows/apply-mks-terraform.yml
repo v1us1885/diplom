@@ -25,7 +25,7 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Initialize Terraform in terraform-mks
-        run: terraform init
+        run: terraform init -reconfigure
         working-directory: ./terraform-mks
 
       - name: Apply Terraform in terraform-mks
