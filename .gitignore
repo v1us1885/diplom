@@ -1,0 +1,10 @@
+*.json
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+
+# Исключить директорию с провайдерами Terraform
+.terraform/
+
+# Исключить чувствительные данные
+sa-key.json
