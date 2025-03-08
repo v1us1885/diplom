@@ -67,6 +67,7 @@ jobs:
         run: |
           yc managed-kubernetes cluster get-credentials \
             --name mks-cluster \
+            --folder-id b1ga79lki1s68b3r289b \
             --external \
             --context-name k8s-deploy-context \
             --force
