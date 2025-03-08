@@ -53,20 +53,20 @@ jobs:
 
       - name: Install Yandex CLI
         env:
-          YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+          YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_KEY_INIT }}
         run: |
           curl -sSL https://storage.yandexcloud.net/yandexcloud-yc/install.sh | bash -s -- -a
           echo "$HOME/yandex-cloud/bin" >> $GITHUB_PATH
 
       - name: Configure YC credentials
         run: |
-          echo "${{ secrets.YC_SA_JSON_CREDENTIALS }}" | base64 -d > sa-key.json
+          echo "${{ secrets.YC_SA_KRY_INIT }}" | base64 -d > sa-key.json
           yc config set service-account-key sa-key.json
 
       - name: Configure kubeconfig
         run: |
           yc managed-kubernetes cluster get-credentials \
-            --id catt47ebjvlh6nbvfq1u \
+            --name mks-cluster \
             --external \
             --context-name k8s-deploy-context \
             --force

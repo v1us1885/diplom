@@ -26,49 +26,8 @@ resource "yandex_kubernetes_cluster" "k8s_cluster" {
     public_ip = true
   }
 
-  service_account_id      = yandex_iam_service_account.terraform-k8s.id
-  node_service_account_id = yandex_iam_service_account.terraform-k8s.id
-  depends_on = [
-    yandex_resourcemanager_folder_iam_member.load-balancer-admin,
-    yandex_resourcemanager_folder_iam_member.compute_editor,
-    yandex_resourcemanager_folder_iam_member.k8s-editor,
-    yandex_resourcemanager_folder_iam_member.k8s-clusters-agent,
-    yandex_resourcemanager_folder_iam_member.vpc-public-admin,
-  ]
+  service_account_id      = var.terraform_sa_id
+  node_service_account_id = var.terraform_sa_id
   release_channel = "STABLE"
 }
 
-resource "yandex_iam_service_account" "terraform-k8s" {
-  name        = "terraform-k8s-account"
-  description = "K8S zonal service account"
-}
-
-resource "yandex_resourcemanager_folder_iam_member" "k8s-editor" {
-  folder_id = var.yc_folder_id
-  role      = "k8s.editor"
-  member    = "serviceAccount:${yandex_iam_service_account.terraform-k8s.id}"
-}
-
-resource "yandex_resourcemanager_folder_iam_member" "k8s-clusters-agent" {
-  folder_id = var.yc_folder_id
-  role      = "k8s.clusters.agent"
-  member    = "serviceAccount:${yandex_iam_service_account.terraform-k8s.id}"
-}
-
-resource "yandex_resourcemanager_folder_iam_member" "vpc-public-admin" {
-  folder_id = var.yc_folder_id
-  role      = "vpc.publicAdmin"
-  member    = "serviceAccount:${yandex_iam_service_account.terraform-k8s.id}"
-}
-
-resource "yandex_resourcemanager_folder_iam_member" "compute_editor" {
-  folder_id = var.yc_folder_id
-  role      = "compute.editor"
-  member    = "serviceAccount:${yandex_iam_service_account.terraform-k8s.id}"
-}
-
-resource "yandex_resourcemanager_folder_iam_member" "load-balancer-admin" {
-  folder_id = var.yc_folder_id
-  role      = "load-balancer.admin"
-  member    = "serviceAccount:${yandex_iam_service_account.terraform-k8s.id}"
-}

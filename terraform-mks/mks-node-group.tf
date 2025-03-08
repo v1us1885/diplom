@@ -32,12 +32,12 @@ resource "yandex_kubernetes_node_group" "node-group" {
 
     boot_disk {
       type = "network-ssd"
-      size = 20
+      size = 30
     }
 
     network_interface {
       subnet_ids = local.subnet_ids
-      nat        = true
+      nat        = false
     }
 
     container_runtime {
