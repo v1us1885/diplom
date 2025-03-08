@@ -1,0 +1,33 @@
+name: Apply Terraform for MKS
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'terraform-mks/**'
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create SA key file
+        env:
+          YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+        run: |
+        echo "${{ secrets.YC_SA_JSON_CREDENTIALS }}" | base64 -d > sa-key.json
+        yc config set service-account-key sa-key.json
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Initialize Terraform in terraform-mks
+        run: terraform init
+        working-directory: ./terraform-mks
+
+      - name: Apply Terraform in terraform-mks
+        run: terraform apply -auto-approve
+        working-directory: ./terraform-mks
