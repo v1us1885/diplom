@@ -1,0 +1,24 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: terraform-k8s-role
+rules:
+- apiGroups: [""]
+  resources: ["nodes", "pods", "services"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+- apiGroups: ["apps"]
+  resources: ["deployments"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: terraform-k8s-binding
+subjects:
+- kind: User
+  name: ajeq6dr2ht034pei95mn
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: terraform-k8s-role
+  apiGroup: rbac.authorization.k8s.io
