@@ -14,6 +14,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Create SA key file
+        env:
+          YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+        run: |
+          echo "${{ secrets.YC_SA_KEY_INIT }}" | base64 -d > sa-key-init.json
+
       - name: Configure AWS credentials for Yandex S3
         run: |
           mkdir -p ~/.aws

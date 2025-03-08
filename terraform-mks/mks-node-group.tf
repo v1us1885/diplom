@@ -25,14 +25,14 @@ resource "yandex_kubernetes_node_group" "node-group" {
   instance_template {
     platform_id = "standard-v2"
     resources {
-      memory = 2
+      memory = 4
       cores  = 2
       core_fraction = 20
     }
 
     boot_disk {
       type = "network-ssd"
-      size = 30
+      size = 40
     }
 
     network_interface {
