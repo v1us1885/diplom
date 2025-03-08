@@ -31,7 +31,7 @@ resource "yandex_kubernetes_node_group" "node-group" {
     }
 
     boot_disk {
-      type = "network-ssd"
+      type = "network-hdd"
       size = 30
     }
 
