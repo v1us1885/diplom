@@ -18,7 +18,7 @@ jobs:
         env:
           YC_SA_JSON_CREDENTIALS: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
         run: |
-          echo "${{ secrets.YC_SA_JSON_CREDENTIALS }}" | base64 -d > sa-key.json
+          echo "${{ secrets.YC_SA_KEY_INIT }}" | base64 -d > sa-key.json
           yc config set service-account-key sa-key.json
 
       - name: Setup Terraform
