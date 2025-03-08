@@ -20,6 +20,15 @@ jobs:
         run: |
           echo "${{ secrets.YC_SA_KEY_INIT }}" | base64 -d > sa-key-init.json
 
+      - name: Configure AWS credentials for Yandex S3
+        run: |
+          mkdir -p ~/.aws
+          cat <<EOT > ~/.aws/credentials
+          [yandex]
+          aws_access_key_id = ${{ secrets.YC_AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key = ${{ secrets.YC_AWS_SECRET_ACCESS_KEY }}
+          EOT
+  
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
