@@ -16,7 +16,7 @@ metadata:
   name: terraform-k8s-binding
 subjects:
 - kind: User
-  name: aje0qilh5q8r01064215  # Ваш сервисный акаунт
+  name: ajei1n3kfaqth13a3lho  # Ваш сервисный акаунт
   apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: ClusterRole
