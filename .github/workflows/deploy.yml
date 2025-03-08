@@ -60,7 +60,7 @@ jobs:
 
       - name: Configure YC credentials
         run: |
-          echo "${{ secrets.YC_SA_KRY_INIT }}" | base64 -d > sa-key.json
+          echo "${{ secrets.YC_SA_KEY_INIT }}" | base64 -d > sa-key.json
           yc config set service-account-key sa-key.json
 
       - name: Configure kubeconfig
