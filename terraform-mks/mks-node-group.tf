@@ -27,7 +27,7 @@ resource "yandex_kubernetes_node_group" "node-group" {
     resources {
       memory = 4
       cores  = 2
-      core_fraction = 20
+      core_fraction = 50
     }
 
     boot_disk {
