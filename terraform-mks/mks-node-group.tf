@@ -2,7 +2,7 @@ resource "yandex_kubernetes_node_group" "node-group" {
   cluster_id  = yandex_kubernetes_cluster.k8s_cluster.id
   name        = "node-group"
   description = "Worker-ноды для MKS"
-  version     = "1.29"
+  version     = "1.28"
 
   scale_policy {
     fixed_scale {
@@ -25,7 +25,7 @@ resource "yandex_kubernetes_node_group" "node-group" {
   instance_template {
     platform_id = "standard-v2"
     resources {
-      memory = 2
+      memory = 4
       cores  = 2
       core_fraction = 20
     }
@@ -37,7 +37,7 @@ resource "yandex_kubernetes_node_group" "node-group" {
 
     network_interface {
       subnet_ids = local.subnet_ids
-      nat        = false
+      nat        = true
     }
 
     container_runtime {
